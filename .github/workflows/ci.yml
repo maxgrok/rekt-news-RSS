@@ -1,4 +1,4 @@
-name: Generate RSS Feed
+name: Generate and Deploy RSS Feed
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/setup-python@v2
+        uses: actions/checkout@v2
       
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -22,10 +22,13 @@ jobs:
           pip install requests beautifulsoup4
       
       - name: Generate RSS XML
-        run: cd .. && python generate-rekt-rss.py
+        run: python generate-rekt-rss.py  # Ensure this matches the script's location
       
       - name: Deploy to Netlify
-        run: |
-          curl -X POST -d {} YOUR_NETLIFY_BUILD_HOOK_URL_HERE
+        uses: nwtgck/actions-netlify@v1.1
+        with:
+          publish-dir: ./public
+          production-deploy: true
         env:
-          YOUR_NETLIFY_BUILD_HOOK_URL_HERE: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
