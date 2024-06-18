@@ -22,7 +22,7 @@ jobs:
           pip3 install requests beautifulsoup4
       
       - name: Generate RSS XML
-        run: python3 ../generate_rss.py
+        run: python3 generate-rekt-rss.py
       
       - name: Deploy to Netlify
         run: |
