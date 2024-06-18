@@ -57,4 +57,4 @@ if __name__ == '__main__':
     base_url = 'https://www.rekt.news/'
     items = scrape_rekt_news(base_url)
     rss_xml = generate_rss_xml(items)
-    save_rss_to_file(rss_xml, 'rekt_news_rss.xml')
+    save_rss_to_file(rss_xml, './public/rekt_news_rss.xml')
