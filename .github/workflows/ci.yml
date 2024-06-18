@@ -19,10 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip3 install requests beautifulsoup4
+          pip install requests beautifulsoup4
       
       - name: Generate RSS XML
-        run: cd ../ && python3 generate-rekt-rss.py
+        run: python generate-rekt-rss.py
       
       - name: Deploy to Netlify
         run: |
